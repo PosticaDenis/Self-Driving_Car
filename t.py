@@ -1,5 +1,6 @@
 from gpiozero import PWMOutputDevice
-from gpiozero import DigitalOutputDevice
+import sys
+import Tkinter as tk
 from time import sleep
 
 # ///////////////// Define Motor Driver GPIO Pins /////////////////
@@ -104,7 +105,6 @@ def reverseTurnRight():
     driveLeft.value = 0.8
     driveRight.value = 0.2
 
-
 def main():
     allStop()
     forwardDrive()
@@ -125,7 +125,17 @@ def main():
     sleep(5)
     allStop()
 
+def key_input(event):
+    print 'Key: ', event.char
+    key_press = event.char
+    sleep_time = 0.03
+
+    if key_press.lower() == 'w':
+        forwardDrive(sleep_time)
 
 if __name__ == "__main__":
     """ This is executed when run from the command line """
-    main()
+    #main()
+    command = tk.Tk()
+    command.blind('<Key_Press>', key_input)
+    command.mainloop()
