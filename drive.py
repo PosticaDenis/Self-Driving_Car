@@ -87,7 +87,7 @@ def forwardTurnLeft(st):
     reverseLeft.value = False
     forwardRight.value = True
     reverseRight.value = False
-    driveLeft.value = 0.5
+    driveLeft.value = 0.6
     driveRight.value = 0.8
 
     sleep(st)
@@ -100,7 +100,7 @@ def forwardTurnRight(st):
     forwardRight.value = True
     reverseRight.value = False
     driveLeft.value = 0.8
-    driveRight.value = 0.5
+    driveRight.value = 0.6
 
     sleep(st)
     allStop()
@@ -111,7 +111,7 @@ def reverseTurnLeft(st):
     reverseLeft.value = True
     forwardRight.value = False
     reverseRight.value = True
-    driveLeft.value = 0.5
+    driveLeft.value = 0.6
     driveRight.value = 0.8
 
     sleep(st)
@@ -124,7 +124,7 @@ def reverseTurnRight(st):
     forwardRight.value = False
     reverseRight.value = True
     driveLeft.value = 0.8
-    driveRight.value = 0.5
+    driveRight.value = 0.6
 
     sleep(st)
     allStop()
@@ -153,23 +153,23 @@ def reverseTurnRight(st):
 def key_input(event):
     print("Key: ", event.char)
     key_press = event.char
-    st = 0.030
+    st = 0.060
 
-    if key_press.loer() == 'w':
+    if key_press.lower() == 'w':
         forwardDrive(st)
-    elif key_press.loer() == 's':
+    elif key_press.lower() == 's':
         reverseDrive(st)
-    elif key_press.loer() == 'a':
+    elif key_press.lower() == 'a':
         spinLeft(st)
-    elif key_press.loer() == 'd':
+    elif key_press.lower() == 'd':
         spinRight(st)
-    elif key_press.loer() == 'q':
+    elif key_press.lower() == 'q':
         forwardTurnLeft(st)
-    elif key_press.loer() == 'e':
+    elif key_press.lower() == 'e':
         forwardTurnRight(st)
-    elif key_press.loer() == 'z':
+    elif key_press.lower() == 'z':
         reverseTurnLeft(st)
-    elif key_press.loer() == 'x':
+    elif key_press.lower() == 'x':
         reverseTurnRight(st)
     else:
         print("Hell no to the no no ...")
