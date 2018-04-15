@@ -151,7 +151,7 @@ def reverseTurnRight(st):
     allStop()'''
 
 def key_input(event):
-    print("Key: ", event.char)
+    print "Key: ", event.char
     key_press = event.char
     st = 0.060
 
