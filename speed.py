@@ -15,13 +15,16 @@ gpio.setup(LEFT_2, gpio.OUT)
 gpio.setup(RIGHT_1, gpio.OUT)
 gpio.setup(RIGHT_2, gpio.OUT)
 gpio.setup(EN, gpio.OUT)
+
+gpio.cleanup()
 try:
-    p = gpio.PWM(EN, 1000)
-    p.start(5)
+    p = gpio.PWM(EN, 250)
+    p.start(10)
     gpio.output(LEFT_1, False)
     gpio.output(LEFT_2, True)
     gpio.output(RIGHT_1, False)
     gpio.output(RIGHT_2, True)
     time.sleep(tf)
+    gpio.cleanup()
 except KeyboardInterrupt:
     gpio.cleanup()
