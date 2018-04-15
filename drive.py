@@ -60,9 +60,9 @@ def reverseDrive(st):
 
 def spinLeft(st):
     forwardLeft.value = True
-    reverseLeft.value = True
+    reverseLeft.value = False
     forwardRight.value = True
-    reverseRight.value = False
+    reverseRight.value = True
     driveLeft.value = 1.0
     driveRight.value = 1.0
 
@@ -72,9 +72,9 @@ def spinLeft(st):
 
 def spinRight(st):
     forwardLeft.value = True
-    reverseLeft.value = False
+    reverseLeft.value = True
     forwardRight.value = True
-    reverseRight.value = True
+    reverseRight.value = False
     driveLeft.value = 1.0
     driveRight.value = 1.0
 
