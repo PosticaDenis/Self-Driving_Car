@@ -59,7 +59,7 @@ def reverseDrive(st):
     allStop()
 
 def spinLeft(st):
-    forwardLeft.value = False
+    forwardLeft.value = True
     reverseLeft.value = True
     forwardRight.value = True
     reverseRight.value = False
@@ -73,7 +73,7 @@ def spinLeft(st):
 def spinRight(st):
     forwardLeft.value = True
     reverseLeft.value = False
-    forwardRight.value = False
+    forwardRight.value = True
     reverseRight.value = True
     driveLeft.value = 1.0
     driveRight.value = 1.0
@@ -153,7 +153,7 @@ def reverseTurnRight(st):
 def key_input(event):
     print "Key: ", event.char
     key_press = event.char
-    st = 0.060
+    st = 0.085
 
     if key_press.lower() == 'w':
         forwardDrive(st)
