@@ -64,7 +64,7 @@ def spinLeft(st):
     forwardRight.value = False
     reverseRight.value = True
     driveLeft.value = 1.0
-    driveRight.value = 0.3
+    driveRight.value = 0.4
 
     sleep(st)
     allStop()
@@ -75,7 +75,7 @@ def spinRight(st):
     reverseLeft.value = True
     forwardRight.value = True
     reverseRight.value = False
-    driveLeft.value = 0.3
+    driveLeft.value = 0.4
     driveRight.value = 1.0
 
     sleep(st)
