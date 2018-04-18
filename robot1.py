@@ -92,9 +92,9 @@ def key_input(event):
     elif key_press.lower() == 'd':
         right(st)
     elif key_press.lower() == 'z':
-        right(st)
+        reverseLeft(st)
     elif key_press.lower() == 'x':
-        right(st)
+        reverseRight(st)
     else:
         print("Hell no to the no no ...")
 
