@@ -1,62 +1,107 @@
 import RPi.GPIO as gpio
 import time
+import sys
+import Tkinter as tk
 
-class Motors:
-    LEFT_1 = 17
-    LEFT_2 = 27
 
-    RIGHT_1 = 23
-    RIGHT_2 = 24
+LEFT_1 = 17
+LEFT_2 = 27
 
-    def init(self):
-        gpio.setmode(gpio.BCM)
-        gpio.setup(self.LEFT_1, gpio.OUT)
-        gpio.setup(self.LEFT_2, gpio.OUT)
-        gpio.setup(self.RIGHT_1, gpio.OUT)
-        gpio.setup(self.RIGHT_2, gpio.OUT)
+RIGHT_1 = 23
+RIGHT_2 = 24
 
-    def forward(self, tf):
-        self.init()
-        gpio.output(self.LEFT_1, False)
-        gpio.output(self.LEFT_2, True)
-        gpio.output(self.RIGHT_1, False)
-        gpio.output(self.RIGHT_2, True)
+def init():
+    gpio.setmode(gpio.BCM)
+    gpio.setup(LEFT_1, gpio.OUT)
+    gpio.setup(LEFT_2, gpio.OUT)
+    gpio.setup(RIGHT_1, gpio.OUT)
+    gpio.setup(RIGHT_2, gpio.OUT)
 
-        time.sleep(tf)
-        gpio.cleanup()
+def forward(tf):
+    init()
+    gpio.output(LEFT_1, False)
+    gpio.output(LEFT_2, True)
+    gpio.output(RIGHT_1, False)
+    gpio.output(RIGHT_2, True)
 
-    def reverse(self, tf):
-        self.init()
-        gpio.output(self.LEFT_1, True)
-        gpio.output(self.LEFT_2, False)
-        gpio.output(self.RIGHT_1, True)
-        gpio.output(self.RIGHT_2, False)
+    time.sleep(tf)
+    gpio.cleanup()
 
-        time.sleep(tf)
-        gpio.cleanup()
+def reverse(tf):
+    init()
+    gpio.output(LEFT_1, True)
+    gpio.output(LEFT_2, False)
+    gpio.output(RIGHT_1, True)
+    gpio.output(RIGHT_2, False)
 
-    def right(self, tf):
-        self.init()
-        gpio.output(self.LEFT_1, gpio.HIGH)
-        gpio.output(self.LEFT_2, gpio.HIGH)
-        gpio.output(self.RIGHT_1, gpio.LOW)
-        gpio.output(self.RIGHT_2, gpio.HIGH)
+    time.sleep(tf)
+    gpio.cleanup()
 
-        time.sleep(tf)
-        gpio.cleanup()
+def right(tf):
+    init()
+    gpio.output(LEFT_1, True)
+    gpio.output(LEFT_2, True)
+    gpio.output(RIGHT_1, False)
+    gpio.output(RIGHT_2, True)
 
-    def left(self, tf):
-        self.init()
-        gpio.output(self.LEFT_1, gpio.LOW)
-        gpio.output(self.LEFT_2, gpio.HIGH)
-        gpio.output(self.RIGHT_1, gpio.HIGH)
-        gpio.output(self.RIGHT_2, gpio.HIGH)
+    time.sleep(tf)
+    gpio.cleanup()
 
-        time.sleep(tf)
-        gpio.cleanup()
+def reverseRight(tf):
+    init()
+    gpio.output(LEFT_1, True)
+    gpio.output(LEFT_2, True)
+    gpio.output(RIGHT_1, True)
+    gpio.output(RIGHT_2, False)
+
+    time.sleep(tf)
+    gpio.cleanup()
+
+def left(tf):
+    init()
+    gpio.output(LEFT_1, False)
+    gpio.output(LEFT_2, True)
+    gpio.output(RIGHT_1, True)
+    gpio.output(RIGHT_2, True)
+
+    time.sleep(tf)
+    gpio.cleanup()
+
+def reverseLeft(tf):
+    init()
+    gpio.output(LEFT_1, True)
+    gpio.output(LEFT_2, False)
+    gpio.output(RIGHT_1, True)
+    gpio.output(RIGHT_2, True)
+
+    time.sleep(tf)
+    gpio.cleanup()
+
+
+def key_input(event):
+    print "Key: ", event.char
+    key_press = event.char
+    st = 0.085
+
+    if key_press.lower() == 'w':
+        forward(st)
+    elif key_press.lower() == 's':
+        reverse(st)
+    elif key_press.lower() == 'a':
+        left(st)
+    elif key_press.lower() == 'd':
+        right(st)
+    elif key_press.lower() == 'z':
+        right(st)
+    elif key_press.lower() == 'x':
+        right(st)
+    else:
+        print("Hell no to the no no ...")
+
 
 try:
-    motor = Motors()
-
+    command = tk.Tk()
+    command.bind('<KeyPress>', key_input)
+    command.mainloop()
 except KeyboardInterrupt:
     gpio.cleanup()
