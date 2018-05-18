@@ -7,8 +7,8 @@ import Tkinter as tk
 LEFT_1 = 17
 LEFT_2 = 27
 
-RIGHT_1 = 23
-RIGHT_2 = 24
+RIGHT_2 = 23
+RIGHT_1 = 24
 
 def init():
     gpio.setmode(gpio.BCM)
