@@ -10,12 +10,22 @@ LEFT_2 = 27
 RIGHT_2 = 23
 RIGHT_1 = 24
 
+LEFT_11 = 5
+LEFT_21 = 6
+
+RIGHT_22 = 20
+RIGHT_12 = 21
+
 def init():
     gpio.setmode(gpio.BCM)
     gpio.setup(LEFT_1, gpio.OUT)
     gpio.setup(LEFT_2, gpio.OUT)
     gpio.setup(RIGHT_1, gpio.OUT)
     gpio.setup(RIGHT_2, gpio.OUT)
+    gpio.setup(LEFT_11, gpio.OUT)
+    gpio.setup(LEFT_21, gpio.OUT)
+    gpio.setup(RIGHT_12, gpio.OUT)
+    gpio.setup(RIGHT_22, gpio.OUT)
 
 def forward(tf):
     init()
@@ -23,6 +33,11 @@ def forward(tf):
     gpio.output(LEFT_2, True)
     gpio.output(RIGHT_1, False)
     gpio.output(RIGHT_2, True)
+
+    gpio.output(LEFT_11, False)
+    gpio.output(LEFT_21, True)
+    gpio.output(RIGHT_12, False)
+    gpio.output(RIGHT_22, True)
 
     time.sleep(tf)
     gpio.cleanup()
