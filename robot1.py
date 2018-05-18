@@ -13,8 +13,8 @@ RIGHT_1 = 24
 LEFT_11 = 5
 LEFT_21 = 6
 
-RIGHT_22 = 20
-RIGHT_12 = 21
+RIGHT_22 = 21
+RIGHT_12 = 20
 
 def init():
     gpio.setmode(gpio.BCM)
