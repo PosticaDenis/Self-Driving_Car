@@ -1,29 +1,17 @@
-import logging
 import socket
 import car_controller as car
 
-log = logging.getLogger('udp_server')
 TF = 0.05
 UDP_IP = "127.0.0.1"
 UDP_PORT = 5005
 
+sock = socket.socket(socket.AF_INET, # Internet
+                     socket.SOCK_DGRAM) # UDP
+sock.bind((UDP_IP, UDP_PORT))
 
-def udp_server(UDP_IP, UDP_PORT):
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-
-    log.info("Listening on udp %s:%s" % (UDP_IP, UDP_PORT))
-    s.bind((UDP_IP, UDP_PORT))
-    while True:
-        (data, addr) = s.recvfrom(128*1024)
-        yield data
-
-
-FORMAT_CONS = '%(asctime)s %(name)-12s %(levelname)8s\t%(message)s'
-logging.basicConfig(level=logging.DEBUG, format=FORMAT_CONS)
-
-
-for data in udp_server():
+while True:
+    data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
+    print('Received: ' + data)
     if data.lower() == 'w':
         car.forward(TF)
     elif data.lower() == 's':
