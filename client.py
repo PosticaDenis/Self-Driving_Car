@@ -18,7 +18,7 @@ def key_input(event):
     key_press = event.char
     key_set = ['w', 's', 'a', 'd', 'q', 'e']
 
-    if key_set.__contains__(key_press.lower):
+    if key_press.lower() in key_set:
         MESSAGE = key_press.lower()
         print('Key: ' + MESSAGE)
         sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
