@@ -3,11 +3,11 @@ import time
 import sys
 import Tkinter as tk
 
-FRIGHT_1 = 17
-FRIGHT_2 = 27
+FRIGHT_1 = 23
+FRIGHT_2 = 24
 
-BRIGHT_2 = 23
-BRIGHT_1 = 24
+BRIGHT_2 = 17
+BRIGHT_1 = 241
 
 FLEFT_1 = 5
 FLEFT_2 = 6
@@ -40,11 +40,13 @@ def forward(tf):
 
     time.sleep(tf)
     gpio.cleanup()
-    
+
+
 def one(tf):
     init()
     gpio.output(FRIGHT_1, True)
-    gpio.output(FRIGHT_2, False)
+    gpio.output(FRIGHT_2, False) #move back
+
     gpio.output(BRIGHT_1, False)
     gpio.output(BRIGHT_2, False)
 
@@ -58,22 +60,46 @@ def one(tf):
 
 def two(tf):
     init()
+    gpio.output(FRIGHT_1, False)
+    gpio.output(FRIGHT_2, False)  # move back
+
     gpio.output(BRIGHT_1, True)
     gpio.output(BRIGHT_2, False)
+
+    gpio.output(FLEFT_1, False)
+    gpio.output(FLEFT_2, False)
+    gpio.output(BLEFT_1, False)
+    gpio.output(BLEFT_2, False)
 
     time.sleep(tf)
     gpio.cleanup()
 
 def three(tf):
     init()
+    gpio.output(FRIGHT_1, True)
+    gpio.output(FRIGHT_2, False)  # move back
+
+    gpio.output(BRIGHT_1, False)
+    gpio.output(BRIGHT_2, False)
+
     gpio.output(FLEFT_1, True)
     gpio.output(FLEFT_2, False)
+    gpio.output(BLEFT_1, False)
+    gpio.output(BLEFT_2, False)
 
     time.sleep(tf)
     gpio.cleanup()
 
 def four(tf):
     init()
+    gpio.output(FRIGHT_1, False)
+    gpio.output(FRIGHT_2, False)  # move back
+
+    gpio.output(BRIGHT_1, False)
+    gpio.output(BRIGHT_2, False)
+
+    gpio.output(FLEFT_1, False)
+    gpio.output(FLEFT_2, False)
     gpio.output(BLEFT_1, True)
     gpio.output(BLEFT_2, False)
 
