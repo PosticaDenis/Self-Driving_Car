@@ -12,8 +12,8 @@ BRIGHT_1 = 27
 FLEFT_1 = 5
 FLEFT_2 = 6
 
-BLEFT_1 = 20
-BLEFT_2 = 21
+BLEFT_1 = 21
+BLEFT_2 = 20
 
 def init():
     gpio.setmode(gpio.BCM)
@@ -45,7 +45,7 @@ def forward(tf):
 def one(tf):
     init()
     gpio.output(FRIGHT_1, True)
-    gpio.output(FRIGHT_2, False) #move back
+    gpio.output(FRIGHT_2, False) #move forward
 
     gpio.output(BRIGHT_1, False)
     gpio.output(BRIGHT_2, False)
@@ -61,7 +61,7 @@ def one(tf):
 def two(tf):
     init()
     gpio.output(FRIGHT_1, False)
-    gpio.output(FRIGHT_2, False)  # move back
+    gpio.output(FRIGHT_2, False)
 
     gpio.output(BRIGHT_1, True)
     gpio.output(BRIGHT_2, False)
@@ -76,7 +76,7 @@ def two(tf):
 
 def three(tf):
     init()
-    gpio.output(FRIGHT_1, True)
+    gpio.output(FRIGHT_1, False)
     gpio.output(FRIGHT_2, False)  # move back
 
     gpio.output(BRIGHT_1, False)
