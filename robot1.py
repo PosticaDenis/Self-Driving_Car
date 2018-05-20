@@ -45,6 +45,13 @@ def one(tf):
     init()
     gpio.output(FRIGHT_1, True)
     gpio.output(FRIGHT_2, False)
+    gpio.output(BRIGHT_1, False)
+    gpio.output(BRIGHT_2, False)
+
+    gpio.output(FLEFT_1, False)
+    gpio.output(FLEFT_2, False)
+    gpio.output(BLEFT_1, False)
+    gpio.output(BLEFT_2, False)
 
     time.sleep(tf)
     gpio.cleanup()
