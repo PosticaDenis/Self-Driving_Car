@@ -3,91 +3,129 @@ import time
 import sys
 import Tkinter as tk
 
+FRIGHT_1 = 17
+FRIGHT_2 = 27
 
-LEFT_1 = 17
-LEFT_2 = 27
+BRIGHT_2 = 23
+BRIGHT_1 = 24
 
-RIGHT_2 = 23
-RIGHT_1 = 24
+FLEFT_1 = 5
+FLEFT_2 = 6
 
-LEFT_11 = 5
-LEFT_21 = 6
-
-RIGHT_22 = 21
-RIGHT_12 = 20
+BLEFT_1 = 20
+BLEFT_2 = 21
 
 def init():
     gpio.setmode(gpio.BCM)
-    gpio.setup(LEFT_1, gpio.OUT)
-    gpio.setup(LEFT_2, gpio.OUT)
-    gpio.setup(RIGHT_1, gpio.OUT)
-    gpio.setup(RIGHT_2, gpio.OUT)
-    gpio.setup(LEFT_11, gpio.OUT)
-    gpio.setup(LEFT_21, gpio.OUT)
-    gpio.setup(RIGHT_12, gpio.OUT)
-    gpio.setup(RIGHT_22, gpio.OUT)
+    gpio.setup(FRIGHT_1, gpio.OUT)
+    gpio.setup(FRIGHT_2, gpio.OUT)
+    gpio.setup(BRIGHT_1, gpio.OUT)
+    gpio.setup(BRIGHT_2, gpio.OUT)
+    gpio.setup(FLEFT_1, gpio.OUT)
+    gpio.setup(FLEFT_2, gpio.OUT)
+    gpio.setup(BLEFT_1, gpio.OUT)
+    gpio.setup(BLEFT_2, gpio.OUT)
 
 def forward(tf):
     init()
-    gpio.output(LEFT_1, False)
-    gpio.output(LEFT_2, True)
-    gpio.output(RIGHT_1, False)
-    gpio.output(RIGHT_2, True)
+    gpio.output(FRIGHT_1, False)
+    gpio.output(FRIGHT_2, True)
+    gpio.output(BRIGHT_1, False)
+    gpio.output(BRIGHT_2, True)
 
-    gpio.output(LEFT_11, False)
-    gpio.output(LEFT_21, True)
-    gpio.output(RIGHT_12, False)
-    gpio.output(RIGHT_22, True)
+    gpio.output(FLEFT_1, False)
+    gpio.output(FLEFT_2, True)
+    gpio.output(BLEFT_1, False)
+    gpio.output(BLEFT_2, True)
+
+    time.sleep(tf)
+    gpio.cleanup()
+    
+def one(tf):
+    init()
+    gpio.output(FRIGHT_1, True)
+    gpio.output(FRIGHT_2, False)
 
     time.sleep(tf)
     gpio.cleanup()
 
+def two(tf):
+    init()
+    gpio.output(BRIGHT_1, True)
+    gpio.output(BRIGHT_2, False)
+
+    time.sleep(tf)
+    gpio.cleanup()
+
+def three(tf):
+    init()
+    gpio.output(FLEFT_1, True)
+    gpio.output(FLEFT_2, False)
+
+    time.sleep(tf)
+    gpio.cleanup()
+
+def four(tf):
+    init()
+    gpio.output(BLEFT_1, True)
+    gpio.output(BLEFT_2, False)
+
+    time.sleep(tf)
+    gpio.cleanup()
+
+
+
 def reverse(tf):
     init()
-    gpio.output(LEFT_1, True)
-    gpio.output(LEFT_2, False)
-    gpio.output(RIGHT_1, True)
-    gpio.output(RIGHT_2, False)
+    gpio.output(FRIGHT_1, True)
+    gpio.output(FRIGHT_2, False)
+    gpio.output(BRIGHT_1, True)
+    gpio.output(BRIGHT_2, False)
+
+    gpio.output(FLEFT_1, True)
+    gpio.output(FLEFT_2, False)
+    gpio.output(BLEFT_1, True)
+    gpio.output(BLEFT_2, False)
 
     time.sleep(tf)
     gpio.cleanup()
 
 def right(tf):
     init()
-    gpio.output(LEFT_1, True)
-    gpio.output(LEFT_2, True)
-    gpio.output(RIGHT_1, False)
-    gpio.output(RIGHT_2, True)
+    gpio.output(FRIGHT_1, True)
+    gpio.output(FRIGHT_2, True)
+    gpio.output(BRIGHT_1, False)
+    gpio.output(BRIGHT_2, True)
 
     time.sleep(tf)
     gpio.cleanup()
 
 def reverseRight(tf):
     init()
-    gpio.output(LEFT_1, True)
-    gpio.output(LEFT_2, True)
-    gpio.output(RIGHT_1, True)
-    gpio.output(RIGHT_2, False)
+    gpio.output(FRIGHT_1, True)
+    gpio.output(FRIGHT_2, True)
+    gpio.output(BRIGHT_1, True)
+    gpio.output(BRIGHT_2, False)
 
     time.sleep(tf)
     gpio.cleanup()
 
 def left(tf):
     init()
-    gpio.output(LEFT_1, False)
-    gpio.output(LEFT_2, True)
-    gpio.output(RIGHT_1, True)
-    gpio.output(RIGHT_2, True)
+    gpio.output(FRIGHT_1, False)
+    gpio.output(FRIGHT_2, True)
+    gpio.output(BRIGHT_1, True)
+    gpio.output(BRIGHT_2, True)
 
     time.sleep(tf)
     gpio.cleanup()
 
 def reverseLeft(tf):
     init()
-    gpio.output(LEFT_1, True)
-    gpio.output(LEFT_2, False)
-    gpio.output(RIGHT_1, True)
-    gpio.output(RIGHT_2, True)
+    gpio.output(FRIGHT_1, True)
+    gpio.output(FRIGHT_2, False)
+    gpio.output(BRIGHT_1, True)
+    gpio.output(BRIGHT_2, True)
 
     time.sleep(tf)
     gpio.cleanup()
@@ -110,6 +148,14 @@ def key_input(event):
         reverseLeft(st)
     elif key_press.lower() == 'x':
         reverseRight(st)
+    elif key_press.lower() == '1':
+        one(st)
+    elif key_press.lower() == '2':
+        two(st)
+    elif key_press.lower() == '3':
+        three(st)
+    elif key_press.lower() == '4':
+        four(st)
     else:
         print("Hell no to the no no ...")
 
