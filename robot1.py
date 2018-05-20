@@ -119,7 +119,7 @@ def left(tf):
 def key_input(event):
     print "Key: ", event.char
     key_press = event.char
-    st = 0.085
+    st = 0.05
 
     if key_press.lower() == 'w':
         forward(st)
