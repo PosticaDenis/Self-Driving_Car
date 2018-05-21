@@ -6,22 +6,25 @@ PWM_DRIVE_FRIGHT = 26
 FRIGHT_1 = 23
 FRIGHT_2 = 24
 
-#PWM_DRIVE_FRIGHT
+PWM_DRIVE_BRIGHT = 12
 BRIGHT_1 = 27
 BRIGHT_2 = 17
 
-#PWM_DRIVE_FLEFT
+PWM_DRIVE_FLEFT = 22
 FLEFT_1 = 6
 FLEFT_2 = 5
 
-#PWM_DRIVE_BLEFT
+PWM_DRIVE_BLEFT = 25
 BLEFT_1 = 21
 BLEFT_2 = 20
 
 # Initialise objects for H-Bridge GPIO PWM pins
 # Set initial duty cycle to 0 and frequency to 1000
-#driveLeft = PWMOutputDevice(PWM_DRIVE_LEFT, True, 0, 1000)
-driveRight = PWMOutputDevice(PWM_DRIVE_FRIGHT, True, 0, 1000)
+driveLeft1 = PWMOutputDevice(PWM_DRIVE_FLEFT, True, 0, 1000)
+driveLeft2 = PWMOutputDevice(PWM_DRIVE_BLEFT, True, 0, 1000)
+
+driveRight1 = PWMOutputDevice(PWM_DRIVE_FRIGHT, True, 0, 1000)
+driveRight2 = PWMOutputDevice(PWM_DRIVE_BRIGHT, True, 0, 1000)
 
 # Initialise objects for H-Bridge digital GPIO pins
 forwardLeft1 = PWMOutputDevice(FLEFT_1)
@@ -45,7 +48,10 @@ def forwardDrive(tf):
     forwardRight2.value = False
     reverseRight1.value = True
     reverseRight2.value = False
-    driveRight.value = 1.0
+    driveRight1.value = 1.0
+    driveRight2.value = 1.0
+    driveLeft1.value = 0.7
+    driveLeft2.value = 0.7
     time.sleep(tf)
     allStop()
 
@@ -58,8 +64,10 @@ def allStop():
     forwardRight2.value = False
     reverseRight1.value = False
     reverseRight2.value = False
-    #driveLeft.value = 0
-    driveRight.value = 0
+    driveRight1.value = 0.0
+    driveRight2.value = 0.0
+    driveLeft1.value = 0.0
+    driveLeft2.value = 0.0
 
 def key_input(event):
     print "Key: ", event.char
