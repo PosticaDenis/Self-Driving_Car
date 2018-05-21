@@ -37,36 +37,29 @@ reverseRight1 = PWMOutputDevice(BRIGHT_1)
 reverseRight2 = PWMOutputDevice(BRIGHT_2)
 
 def forwardDrive(tf):
-	forwardLeft1.value = True
-	forwardLeft2.value = False
-
-	reverseLeft1.value = True
-	reverseLeft2.value = False
-
-	forwardRight1.value = True
-	forwardRight2.value = False
-
-	reverseRight1.value = True
-	reverseRight2.value = False
-
-    driveRight.value = 0.5
+    forwardLeft1.value = True
+    forwardLeft2.value = False
+    reverseLeft1.value = True
+    reverseLeft2.value = False
+    forwardRight1.value = True
+    forwardRight2.value = False
+    reverseRight1.value = True
+    reverseRight2.value = False
+    driveRight.value = 1.0
     time.sleep(tf)
     allStop()
 
 def allStop():
     forwardLeft1.value = False
     forwardLeft2.value = False
-
     reverseLeft1.value = False
     reverseLeft2.value = False
-
     forwardRight1.value = False
     forwardRight2.value = False
-
     reverseRight1.value = False
     reverseRight2.value = False
-	#driveLeft.value = 0
-	driveRight.value = 0
+    #driveLeft.value = 0
+    driveRight.value = 0
 
 def key_input(event):
     print "Key: ", event.char
@@ -75,7 +68,6 @@ def key_input(event):
 
     if key_press.lower() in key_set:
         forwardDrive(0.03)
-        sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
     else:
         print("Hell no to the no no ...")
 
