@@ -91,9 +91,9 @@ def fullleft(tf):
     gpio.output(FRIGHT_1, True)
     gpio.output(FRIGHT_2, False)
     gpio.output(BRIGHT_1, True)
-    gpio.output(BRIGHT_2, False)
+    gpio.output(BRIGHT_2, True)
 
-    gpio.output(FLEFT_1, False)
+    gpio.output(FLEFT_1, True)
     gpio.output(FLEFT_2, True)
     gpio.output(BLEFT_1, False)
     gpio.output(BLEFT_2, True)
