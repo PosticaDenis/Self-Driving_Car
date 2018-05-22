@@ -40,10 +40,10 @@ pwmbr = gpio.PWM(BRIGHT_PWM, 100)
 pwmfl = gpio.PWM(FLEFT_PWM, 100)
 pwmbl = gpio.PWM(BLEFT_PWM, 100)
 
-pwmbr.start(100)
-pwmfr.start(100)
-pwmbl.start(100)
-pwmfl.start(100)
+pwmbr.start(0)
+pwmfr.start(0)
+pwmbl.start(0)
+pwmfl.start(0)
 
 def stop():
     pwmbl.ChangeDutyCycle(0)
