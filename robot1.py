@@ -18,11 +18,6 @@ BLEFT_1 = 21
 BLEFT_2 = 20
 BLEFT_PWM = 19
 
-pwmfr = 0
-pwmbr = 0
-pwmfl = 0
-pwmbl = 0
-
 def init():
     gpio.setmode(gpio.BCM)
 
@@ -40,10 +35,10 @@ def init():
     gpio.setup(BLEFT_1, gpio.OUT)
     gpio.setup(BLEFT_2, gpio.OUT)
 
-    pwmfr = gpio.PWM(FRIGHT_PWM, 100)
-    pwmbr = gpio.PWM(BRIGHT_PWM, 100)
-    pwmfl = gpio.PWM(FLEFT_PWM, 100)
-    pwmbl = gpio.PWM(BLEFT_PWM, 100)
+    #pwmfr = gpio.PWM(FRIGHT_PWM, 100)
+    #pwmbr = gpio.PWM(BRIGHT_PWM, 100)
+    #pwmfl = gpio.PWM(FLEFT_PWM, 100)
+    #pwmbl = gpio.PWM(BLEFT_PWM, 100)
 
 def reverse(tf):
     init()
@@ -63,6 +58,13 @@ def reverse(tf):
 def forward(tf):
     init()
 
+    pwmfr = gpio.PWM(FRIGHT_PWM, 100)
+    pwmbr = gpio.PWM(BRIGHT_PWM, 100)
+    pwmfl = gpio.PWM(FLEFT_PWM, 100)
+    pwmbl = gpio.PWM(BLEFT_PWM, 100)
+
+    pwmbr.start(100)
+    pwmfr.start(100)
     pwmbl.start(25)
     pwmfl.start(25)
 
