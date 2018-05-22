@@ -61,7 +61,7 @@ def stop():
     gpio.output(BLEFT_1, True)
     gpio.output(BLEFT_2, True)
 
-def reverse(tf):
+def reverse(tf, dc1, dc2, dc3, dc4):
     pwmbl.ChangeDutyCycle(100)
     pwmfl.ChangeDutyCycle(100)
     pwmfr.ChangeDutyCycle(100)
@@ -80,11 +80,11 @@ def reverse(tf):
     time.sleep(tf)
     stop()
 
-def forward(tf):
-    pwmbl.ChangeDutyCycle(100)
-    pwmfl.ChangeDutyCycle(100)
-    pwmfr.ChangeDutyCycle(100)
-    pwmbr.ChangeDutyCycle(100)
+def forward(tf, dc1, dc2, dc3, dc4):
+    pwmbl.ChangeDutyCycle(dc1)
+    pwmfl.ChangeDutyCycle(dc2)
+    pwmfr.ChangeDutyCycle(dc3)
+    pwmbr.ChangeDutyCycle(dc4)
 
     gpio.output(FRIGHT_1, True)
     gpio.output(FRIGHT_2, False)
@@ -102,8 +102,8 @@ def forward(tf):
 def fullright(tf):
     pwmbl.ChangeDutyCycle(100)
     pwmfl.ChangeDutyCycle(100)
-    pwmfr.ChangeDutyCycle(30)
-    pwmbr.ChangeDutyCycle(30)
+    pwmfr.ChangeDutyCycle(50)
+    pwmbr.ChangeDutyCycle(50)
 
     gpio.output(FRIGHT_1, False)
     gpio.output(FRIGHT_2, True)
@@ -118,23 +118,9 @@ def fullright(tf):
     time.sleep(tf)
     stop()
 
-def right(tf):
-    gpio.output(FRIGHT_1, True)
-    gpio.output(FRIGHT_2, True)
-    gpio.output(BRIGHT_1, True)
-    gpio.output(BRIGHT_2, True)
-
-    gpio.output(FLEFT_1, True)
-    gpio.output(FLEFT_2, False)
-    gpio.output(BLEFT_1, True)
-    gpio.output(BLEFT_2, False)
-
-    time.sleep(tf)
-    stop()
-
 def fullleft(tf):
-    pwmbl.ChangeDutyCycle(30)
-    pwmfl.ChangeDutyCycle(30)
+    pwmbl.ChangeDutyCycle(50)
+    pwmfl.ChangeDutyCycle(50)
     pwmfr.ChangeDutyCycle(100)
     pwmbr.ChangeDutyCycle(100)
 
@@ -151,37 +137,23 @@ def fullleft(tf):
     time.sleep(tf)
     stop()
 
-def left(tf):
-    gpio.output(FRIGHT_1, True)
-    gpio.output(FRIGHT_2, False)
-    gpio.output(BRIGHT_1, True)
-    gpio.output(BRIGHT_2, False)
-
-    gpio.output(FLEFT_1, True)
-    gpio.output(FLEFT_2, True)
-    gpio.output(BLEFT_1, True)
-    gpio.output(BLEFT_2, True)
-
-    time.sleep(tf)
-    stop()
-
 def key_input(event):
     print "Key: ", event.char
     key_press = event.char
     st = 0.05
 
     if key_press.lower() == 'w':
-        forward(st)
+        forward(st, 100, 100, 100, 100)
     elif key_press.lower() == 's':
-        reverse(st)
+        reverse(st, 100, 100, 100, 100)
     elif key_press.lower() == 'a':
-        fullleft(st)
+        forward(st, 40, 40, 100, 100)
     elif key_press.lower() == 'd':
-        fullright(st)
-    #elif key_press.lower() == 'q':
-    #    left(st)
-    #elif key_press.lower() == 'e':
-    #    right(st)
+        forward(st, 100, 100, 40, 40)
+    elif key_press.lower() == 'z':
+        reverse(st, 40, 40, 100, 100)
+    elif key_press.lower() == 'x':
+        reverse(st, 100, 100, 40, 40)
     else:
         print("Hell no to the no no ...")
 
