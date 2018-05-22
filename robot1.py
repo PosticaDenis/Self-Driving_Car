@@ -140,20 +140,20 @@ def fullleft(tf):
 def key_input(event):
     print "Key: ", event.char
     key_press = event.char
-    st = 0.05
+    st = 0.065
 
     if key_press.lower() == 'w':
         forward(st, 100, 100, 100, 100)
     elif key_press.lower() == 's':
         reverse(st, 100, 100, 100, 100)
     elif key_press.lower() == 'a':
-        forward(st, 40, 40, 100, 100)
+        forward(st, 30, 30, 100, 100)
     elif key_press.lower() == 'd':
-        forward(st, 100, 100, 40, 40)
+        forward(st, 100, 100, 30, 30)
     elif key_press.lower() == 'z':
-        reverse(st, 40, 40, 100, 100)
+        reverse(st, 30, 30, 100, 100)
     elif key_press.lower() == 'x':
-        reverse(st, 100, 100, 40, 40)
+        reverse(st, 100, 100, 30, 30)
     else:
         print("Hell no to the no no ...")
 
