@@ -1,6 +1,5 @@
 import RPi.GPIO as gpio
 import time
-import sys
 import Tkinter as tk
 
 FRIGHT_1 = 23
@@ -15,13 +14,14 @@ FLEFT_2 = 5
 BLEFT_1 = 21
 BLEFT_2 = 20
 
+gpio.setmode(gpio.BCM)
+
 pwmfr = gpio.PWM(16, 100)
 pwmbr = gpio.PWM(18, 100)
 pwmfl = gpio.PWM(13, 100)
 pwmbl = gpio.PWM(19, 100)
 
 def init():
-    gpio.setmode(gpio.BCM)
     gpio.setup(FRIGHT_1, gpio.OUT)
     gpio.setup(FRIGHT_2, gpio.OUT)
     gpio.setup(BRIGHT_1, gpio.OUT)
