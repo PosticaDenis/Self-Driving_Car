@@ -18,30 +18,55 @@ BLEFT_1 = 21
 BLEFT_2 = 20
 BLEFT_PWM = 19
 
-def init():
-    gpio.setmode(gpio.BCM)
 
-    gpio.setup(FRIGHT_PWM, gpio.OUT)
-    gpio.setup(BRIGHT_PWM, gpio.OUT)
-    gpio.setup(FLEFT_PWM, gpio.OUT)
-    gpio.setup(BLEFT_PWM, gpio.OUT)
+gpio.setmode(gpio.BCM)
 
-    gpio.setup(FRIGHT_1, gpio.OUT)
-    gpio.setup(FRIGHT_2, gpio.OUT)
-    gpio.setup(BRIGHT_1, gpio.OUT)
-    gpio.setup(BRIGHT_2, gpio.OUT)
-    gpio.setup(FLEFT_1, gpio.OUT)
-    gpio.setup(FLEFT_2, gpio.OUT)
-    gpio.setup(BLEFT_1, gpio.OUT)
-    gpio.setup(BLEFT_2, gpio.OUT)
+gpio.setup(FRIGHT_PWM, gpio.OUT)
+gpio.setup(BRIGHT_PWM, gpio.OUT)
+gpio.setup(FLEFT_PWM, gpio.OUT)
+gpio.setup(BLEFT_PWM, gpio.OUT)
 
-    #pwmfr = gpio.PWM(FRIGHT_PWM, 100)
-    #pwmbr = gpio.PWM(BRIGHT_PWM, 100)
-    #pwmfl = gpio.PWM(FLEFT_PWM, 100)
-    #pwmbl = gpio.PWM(BLEFT_PWM, 100)
+gpio.setup(FRIGHT_1, gpio.OUT)
+gpio.setup(FRIGHT_2, gpio.OUT)
+gpio.setup(BRIGHT_1, gpio.OUT)
+gpio.setup(BRIGHT_2, gpio.OUT)
+gpio.setup(FLEFT_1, gpio.OUT)
+gpio.setup(FLEFT_2, gpio.OUT)
+gpio.setup(BLEFT_1, gpio.OUT)
+gpio.setup(BLEFT_2, gpio.OUT)
+
+pwmfr = gpio.PWM(FRIGHT_PWM, 100)
+pwmbr = gpio.PWM(BRIGHT_PWM, 100)
+pwmfl = gpio.PWM(FLEFT_PWM, 100)
+pwmbl = gpio.PWM(BLEFT_PWM, 100)
+
+pwmbr.start(100)
+pwmfr.start(100)
+pwmbl.start(100)
+pwmfl.start(100)
+
+def stop():
+    pwmbl.ChangeDutyCycle(0)
+    pwmfl.ChangeDutyCycle(0)
+    pwmfr.ChangeDutyCycle(0)
+    pwmbr.ChangeDutyCycle(0)
+
+    gpio.output(FRIGHT_1, True)
+    gpio.output(FRIGHT_2, True)
+    gpio.output(BRIGHT_1, True)
+    gpio.output(BRIGHT_2, True)
+
+    gpio.output(FLEFT_1, True)
+    gpio.output(FLEFT_2, True)
+    gpio.output(BLEFT_1, True)
+    gpio.output(BLEFT_2, True)
 
 def reverse(tf):
-    init()
+    pwmbl.ChangeDutyCycle(100)
+    pwmfl.ChangeDutyCycle(100)
+    pwmfr.ChangeDutyCycle(100)
+    pwmbr.ChangeDutyCycle(100)
+
     gpio.output(FRIGHT_1, False)
     gpio.output(FRIGHT_2, True)
     gpio.output(BRIGHT_1, False)
@@ -53,20 +78,13 @@ def reverse(tf):
     gpio.output(BLEFT_2, True)
 
     time.sleep(tf)
-    gpio.cleanup()
+    stop()
 
 def forward(tf):
-    init()
-
-    pwmfr = gpio.PWM(FRIGHT_PWM, 100)
-    pwmbr = gpio.PWM(BRIGHT_PWM, 100)
-    pwmfl = gpio.PWM(FLEFT_PWM, 100)
-    pwmbl = gpio.PWM(BLEFT_PWM, 100)
-
-    pwmbr.start(100)
-    pwmfr.start(100)
-    pwmbl.start(25)
-    pwmfl.start(25)
+    pwmbl.ChangeDutyCycle(100)
+    pwmfl.ChangeDutyCycle(100)
+    pwmfr.ChangeDutyCycle(100)
+    pwmbr.ChangeDutyCycle(100)
 
     gpio.output(FRIGHT_1, True)
     gpio.output(FRIGHT_2, False)
@@ -79,10 +97,14 @@ def forward(tf):
     gpio.output(BLEFT_2, False)
 
     time.sleep(tf)
-    gpio.cleanup()
+    stop()
 
 def fullright(tf):
-    init()
+    pwmbl.ChangeDutyCycle(100)
+    pwmfl.ChangeDutyCycle(100)
+    pwmfr.ChangeDutyCycle(30)
+    pwmbr.ChangeDutyCycle(30)
+
     gpio.output(FRIGHT_1, False)
     gpio.output(FRIGHT_2, True)
     gpio.output(BRIGHT_1, False)
@@ -94,10 +116,9 @@ def fullright(tf):
     gpio.output(BLEFT_2, False)
 
     time.sleep(tf)
-    gpio.cleanup()
+    stop()
 
 def right(tf):
-    init()
     gpio.output(FRIGHT_1, True)
     gpio.output(FRIGHT_2, True)
     gpio.output(BRIGHT_1, True)
@@ -109,10 +130,14 @@ def right(tf):
     gpio.output(BLEFT_2, False)
 
     time.sleep(tf)
-    gpio.cleanup()
+    stop()
 
 def fullleft(tf):
-    init()
+    pwmbl.ChangeDutyCycle(30)
+    pwmfl.ChangeDutyCycle(30)
+    pwmfr.ChangeDutyCycle(100)
+    pwmbr.ChangeDutyCycle(100)
+
     gpio.output(FRIGHT_1, True)
     gpio.output(FRIGHT_2, False)
     gpio.output(BRIGHT_1, True)
@@ -124,10 +149,9 @@ def fullleft(tf):
     gpio.output(BLEFT_2, True)
 
     time.sleep(tf)
-    gpio.cleanup()
+    stop()
 
 def left(tf):
-    init()
     gpio.output(FRIGHT_1, True)
     gpio.output(FRIGHT_2, False)
     gpio.output(BRIGHT_1, True)
@@ -139,7 +163,7 @@ def left(tf):
     gpio.output(BLEFT_2, True)
 
     time.sleep(tf)
-    gpio.cleanup()
+    stop()
 
 def key_input(event):
     print "Key: ", event.char
