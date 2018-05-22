@@ -4,22 +4,30 @@ import Tkinter as tk
 
 FRIGHT_1 = 23
 FRIGHT_2 = 24
+FRIGHT_PWM = 16
 
 BRIGHT_1 = 27
 BRIGHT_2 = 17
+BRIGHT_PWM = 18
 
 FLEFT_1 = 6
 FLEFT_2 = 5
+FLEFT_PWM = 13
 
 BLEFT_1 = 21
 BLEFT_2 = 20
+BLEFT_PWM = 19
 
 gpio.setmode(gpio.BCM)
+gpio.setup(FRIGHT_PWM, gpio.OUT)
+gpio.setup(BRIGHT_PWM, gpio.OUT)
+gpio.setup(FLEFT_PWM, gpio.OUT)
+gpio.setup(BLEFT_PWM, gpio.OUT)
 
-pwmfr = gpio.PWM(16, 100)
-pwmbr = gpio.PWM(18, 100)
-pwmfl = gpio.PWM(13, 100)
-pwmbl = gpio.PWM(19, 100)
+pwmfr = gpio.PWM(FRIGHT_PWM, 100)
+pwmbr = gpio.PWM(BRIGHT_PWM, 100)
+pwmfl = gpio.PWM(FLEFT_PWM, 100)
+pwmbl = gpio.PWM(BLEFT_PWM, 100)
 
 def init():
     gpio.setup(FRIGHT_1, gpio.OUT)
